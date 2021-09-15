@@ -1,0 +1,58 @@
+
+{% extends "nav.html" %}
+
+{% block content %}
+<div>
+  <div style="padding-top: 50px">
+    <h1 style="text-align: center; padding-bottom: 20px">Health Insurance Churn Analysis and Risk Classifier</h1>
+    <div style="background-color: #787171 ">
+      <div class="container" style="padding: 50px 0px 50px; color: white">
+        <h3>About the Project</h3>
+        <p>Our Project mainly focuses on Health Insurance companies. As a company grows it will automatically face some problems. Here we solved top two problems i.e., Churn Analysis and Risk Classification. This project is an intelligent solution using ML for the insurance domain. It uses classification for performing churn and risk analysis on the customers based on their demographics. We then use Flask to vizualize the data and display these results on a webpage.</p>
+      </div>
+    </div>
+  </div>
+  <div style="padding-top: 25px">
+    <div style="background-color: #c9a155;">
+      <div class="container" style="padding: 30px 0px 20px; color: white">
+        <h3>Machine Learning Implentation</h3>
+        <p>The following things hve been used to find solutions for these problems</p>
+        <ol>
+          <li>Artificial Neural Networks</li>
+          <li>Flask</li>
+          <li>Tensorflow</li>
+          <li>SMOTE - Oversampling</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding-top: 30px;">
+    <div  class="row" class="jumbotron">
+      <div class="col">
+        <img src="{{ url_for('static', filename='churn_img.jpeg' ) }}" alt="Churn Analysis" style="width: 100%">
+      </div>
+      <div class="col">
+        <br>
+        <h1>Churn Analysis</h1>      
+        <p>Within a company's customer relationship management strategy, finding the customers most likely to leave is a central aspect. Predicting whether a customer leaves or not is called Churn Analysis. We present a dynamic modelling approach for predicting individual customers’ risk of leaving an insurance company.</p>
+        <button type="button" class="btn btn-info"><a href="/churn_analysis" style="color: black; text-decoration: none;">Learn More</a></button>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 30px 0px 50px;">
+    <div  class="row" class="jumbotron">
+      <div class="col">
+        <img src="{{ url_for('static', filename='risk_img.jpg' ) }}" alt="Risk Classifier" style="width: 100%">
+      </div>
+      <div class="col">
+        <br>
+        <h1>Risk Classifier</h1>      
+        <p>Risk classification is a method an insurance company uses to determine your insuranc rates based on the risk of death you pose to the carrier. The insurance risk class allows insurance companies to determine the amount of coverage needed, as well as how much that coverage should cost. We show an analysis of the data and our approach to solve this problem.</p>
+        <button type="button" class="btn btn-info"><a href="/risk_classifier" style="color: black; text-decoration: none;">Learn More</a></button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

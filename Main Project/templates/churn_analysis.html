@@ -1,0 +1,404 @@
+
+{% extends "nav.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-info sidebar" style="padding-top: 15px">
+          <div class="sidebar-sticky" style="color: white">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" onclick="func('data_desc')">
+                  Dataset Description 
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" onclick="func('dataset')">
+                  Data Set Sample
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" onclick="func('corr_matrix')">
+                  Correlation Matrix
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" onclick="func('conf_matrix')">
+                  Confusion Matrix
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" onclick="func('state_churn')">
+                  State vs Churn
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" onclick="func('age_churn')">
+                  Age-group vs Churn
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" onclick="func('income_churn')">
+                  Income-group vs Churn
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" onclick="func('file_input')">
+                  File Input
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" onclick="func('single_input')">
+                  Single Customer Input
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div class="col-md-9 ml-sm-auto col-lg-10 px-4" style="padding-top: 15px">
+          <div id="data_desc" style="display: block;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">DataSet Description</h1>
+            </div>
+            <p class="h5">State:<small class="text-muted"> State in which customer resides</small></p>
+            <ul>
+              <li>California</li>
+              <li>Colorado </li>
+              <li>Texas</li>
+            </ul><br>
+            <p class="h5">Age:<small class="text-muted"> The ages of the customes between 30 to 60 in years.</small></p><br>
+            <p class="h5">Gender:<small class="text-muted"> Male : 1 and Female : 0.</small></p><br>
+            <p class="h5">Education:<small class="text-muted"> The Education level of the customer between 0-3.</small></p>
+            <ul>
+              <li>0 - Uneducated</li>
+              <li>1 - High School </li>
+              <li>2 - Graduate</li>
+              <li>3 - Post Graduate</li>
+            </ul><br>
+            <p class="h5">Maritial Status:<small class="text-muted"> Married : 1, Unmarried : 0.</small></p><br>
+            <p class="h5">Employment Status:<small class="text-muted"> Working : 1, Not Working : 0.</small></p><br>
+            <p class="h5">Income:<small class="text-muted"> The income of the customer in Lakhs per Annum.</small></p><br>
+            <p class="h5">Feedback:<small class="text-muted"> The Feedback Of the customer between -1 and 1.</small></p>
+            <ul>
+              <li>-1 - Negative</li>
+              <li>0  - Positive </li>
+              <li>1 - Neutral</li>
+            </ul><br>
+            <p class="h5">Sugar:<small class="text-muted"> Suffering from Sugar: 1, Not Suffering from Sugar: 0.</small></p><br>
+            <p class="h5">Heart Disease:<small class="text-muted"> Suffering from Heart Disease: 5, Not Suffering from Heart Disease: 0.</small></p><br>
+            <p class="h5">High Blood Pressure:<small class="text-muted"> Suffering from High Blood Pressure : 5, Not Suffering from High Blood Pressure : 0.</small></p><br>
+            <p class="h5">Smoker:<small class="text-muted"> Smoker : 1, Not Smoker : 0.</small></p><br>
+            <p class="h5">Assured Sum:<small class="text-muted"> Risk Coverage in Lakhs.</small></p><br>
+            <p class="h5">Policy Beneficiaries :<small class="text-muted"> The number of Policy Beneficiaries under the plan.</small></p><br>
+            <p class="h5">Premium:<small class="text-muted"> The premium to be paid by the customer in thousands.</small></p><br>
+            <p class="h5">Churn:<small class="text-muted"> Customer leaves the Company : 1, Customer does not leave the Company : 0.</small></p>
+          </div>
+
+          <div id="dataset" style="display: none;" style="width: 100%">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Sample Dataset</h1>
+            </div>
+            <table class="table table-bordered table-sm">
+              <thead class="thead-light">
+              <tr style="text-align: center;">
+                <th>State</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Education Level</th>
+                <th>Marital Status</th>
+                <th>Employment Status</th>
+                <th>Income</th>
+                <th>Feedback</th>
+                <th>Sugar</th>
+                <th>Heart Disease</th>
+                <th>High BP</th>
+                <th>Smokes</th>
+                <th>Assured Sum</th>
+                <th>Policy Beneficiaries</th>
+                <th>Premium</th>
+                <th>Churn</th>
+              </tr>
+              </thead>
+              <tbody>
+                {% for row in range(rows) %}
+                  <tr>
+                    {% for column in range(16) %}
+                      <td> {{ dataset_sample[row][column] }} </td>
+                    {% endfor %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <div id="corr_matrix" style="display: none;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Correlation Matrix</h1>
+            </div>
+            <div>
+              <p class="lead">A correlation matrix is a table showing correlation coefficients between variables. Each cell in the table shows the correlation between two variables. A correlation matrix is used to summarize data, as an input into a more advanced analysis, and as a diagnostic for advanced analyses.</p>
+            </div>
+            <img width="100%" src="{{ url_for('static', filename='cor.png' ) }}" alt="The Scream">
+          </div>
+
+          <div id="conf_matrix" style="display: none;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Confusion Matrix</h1>
+            </div>
+            <div>
+              <p class="lead">A confusion matrix is a summary of prediction results on a classification problem. The number of correct and incorrect predictions are summarized with count values and broken down by each class. It gives us insight not only into the errors being made by a classifier but more importantly the types of errors that are being made.<br><b>Recall:</b> Recall gives us an idea about when it’s actually yes, how often does it predict yes. <b>0.94</b> is the recall we have got.<br><b>Precision:</b> Precsion tells us about when it predicts yes, how often is it correct. <b>0.86</b> is the precision we have got.</p>
+            </div>
+            <img  src="{{ url_for('static', filename='cm.png' ) }}" alt="The Scream">
+          </div>
+
+          <div id="state_churn" style="display: none;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">State vs Churn Graph</h1>
+            </div>
+            <div class="lead">
+              <p>We can observe that:</p>
+              <ol>
+                <li>Around 50% of the people in California are leaving the company.</li>
+                <li>Around 30% of the poeple living in Colorado are leaving the company.</li>
+                <li>Around 25% of the people living in Texas are leaving the company.</li>
+              </ol>
+              <p>Based on this data we can understand that if we more customer retention we can target California.</p>
+            </div>
+            <img src="{{ url_for('static', filename='STATE_CHURN.png' ) }}" alt="The Scream">
+          </div>
+
+          <div id="age_churn" style="display: none;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Age-group vs Churn Graph</h1>
+            </div>
+            <div class="lead">
+              <p>We can observe that:</p>
+              <ol>
+                <li>Around 30% of the people between the age group of 30-40 years are leaving the company.</li>
+                <li>Around 37% of the poeple between the age group of 40-50 years are leaving the company.</li>
+                <li>Around 70% of the people between the age group of 50-60 years are leaving the company.</li>
+              </ol>
+              <p>Based on this data we can understand that if we want more customer retention we need to target the age group 50-60 years.</p>
+            </div>
+            <img src="{{ url_for('static', filename='AGE_CHURN.jpeg' ) }}" alt="The Scream">
+          </div>
+
+          <div id="income_churn" style="display: none;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Income-group vs Churn Graph</h1>
+            </div>
+            <div class="lead">
+              <p>We can observe that:</p>
+              <ol>
+                <li>Around 50% of the people between the income range of 0-10 lakhs per annum are leaving the company.</li>
+                <li>Around 37% of the poeple between the income range of 10-20 lakhs per annum are leaving the company.</li>
+                <li>Around 70% of the people between the income range of 20-30 lakhs per annum are leaving the company.</li>
+              </ol>
+              <p>Based on this data we can understand that if we want more customer retention we need to target the income range 0-10 lakhs per annum.</p>
+            </div>
+            <img src="{{ url_for('static', filename='INCOME_CHURN.png' ) }}" alt="The Scream">
+          </div>
+
+          <div id="single_input" style="display: none;" style="padding-top: 50px;">
+            <div class="card">
+              <div class="card-header">
+                <h4 align="center">Health Insurance Churn Analysis</h4><br>
+              </div>
+              <div class="card-body w-100">
+          		<form action="/result" method="POST" style="padding-left: 100px; padding-right: 100px;">
+              		<div class="row">
+                  		<div class="form-group">
+                  			<h6>State:</h6>
+                      		<div class="input-group mb-3">
+                        		<select class="custom-select" id="state" name="state">
+                            		<option selected>Choose...</option>
+                            		<option value="0">California</option>
+                            		<option value="1">Colorado</option>
+                            		<option value="2">Texas</option>
+                        		</select>
+		                        <div class="input-group-append">
+		                            <label class="input-group-text" for="inputGroupSelect02">State</label>
+		                        </div>
+                      		</div>
+	                      	<h6>Age:</h6>
+	                      	<div class="form-group">
+	                          	<div class="input-group">
+	                              	<div class="input-group-prepend">
+	                                	<span class="input-group-text">Years</span>
+	                              	</div>
+	                              	<input type="number" id="age" name="age" class="form-control">
+	                          	</div>
+	                      	</div>
+	                      	<div class="form-group">
+	                          	<h6>Gender:</h6>
+	                          	<div class="input-group">
+	                              	<div class="input-group-prepend">
+	                                  	<div class="input-group-text">
+	                                      	<input type="radio" id="male" name="gender" value="1">
+	                                      	<label for="male">Male</label>
+	                                      	<br>
+	                                  	</div>
+	                                  	<div class="input-group-text">
+	                                      	<input type="radio" id="female" name="gender" value="0">
+	                                      	<label for="female">Female</label>
+	                                      	<br>
+	                                  	</div>
+	                              	</div>
+	                          	</div>
+	                      	</div>
+                      		<h6>Education Level:</h6>
+	                      	<div class="input-group mb-3">
+	                        	<select class="custom-select" id="education" name="education">
+	                            	<option selected>Choose...</option>
+	                            	<option value="0">Zero</option>
+	                            	<option value="1">One</option>
+	                            	<option value="2">Two</option>
+	                            	<option value="3">Three</option>
+	                        	</select>
+	                        	<div class="input-group-append">
+	                           		<label class="input-group-text" for="inputGroupSelect02">Education Level</label>
+	                        	</div>
+	                      	</div>
+	                      	<h6>Marital Status:</h6>
+	                      	<div class="custom-control custom-checkbox">
+	                          	<input type="checkbox" class="custom-control-input" id="married" name="married" value="1">
+	                          	<label class="custom-control-label" for="married">Married<br>
+	                          	</label>
+	                          	<input class="custom-control-input" id="marriedhidden" type="hidden" value="0" name="married">
+	                      	</div>
+	                      	<br>
+                      		<h6>Working Status:</h6>
+                      		<div class="custom-control custom-checkbox">
+                          		<input type="checkbox" class="custom-control-input" id="working" name="working" value="1">
+                          		<label class="custom-control-label" for="working">Working</label>
+                          		<input class="custom-control-input" id="workinghidden" type="hidden" value="0" name="working">
+                      		</div>
+                      		<br>
+                      		<h6>Income (LPA):</h6>
+                      		<div class="input-group mb-3">
+                          		<div class="input-group-prepend">
+                              		<span class="input-group-text">Rupees</span>
+                          		</div>
+                          		<input type="number" id="income" name="income" class="form-control">
+                      		</div>
+                      		<h6>Feedback:</h6>
+                      		<div class="input-group mb-3">
+                          		<select class="custom-select" id="feedback" name="feedback">
+                              		<option selected>Choose...</option>
+                              		<option value="-1">Negative</option>
+                              		<option value="0">Neutral</option>
+                              		<option value="1">Positive</option>
+                          		</select>
+                          		<div class="input-group-append">
+                              		<label class="input-group-text" for="inputGroupSelect02">Feedback</label>
+                          		</div>
+                      		</div>
+                      		<h6>Personal Health History:</h6>
+                      		<div class="custom-control custom-checkbox">
+                          		<input type="checkbox" class="custom-control-input" id="smoker" name="smoker" value="1">
+                          		<label class="custom-control-label" for="smoker">Smoker</label>
+                          		<input class="custom-control-input" id="smokerhidden" type="hidden" value="0" name="smoker">
+                      		</div>
+                      		<div class="custom-control custom-checkbox">
+                          		<input type="checkbox" class="custom-control-input" id="sugar" name="sugar" value="1">
+                          		<label class="custom-control-label" for="sugar">Sugar</label>
+                          		<input class="custom-control-input" id="sugarhidden" type="hidden" value="0" name="sugar">
+                      		</div>
+                      		<div class="custom-control custom-checkbox">
+                          		<input type="checkbox" class="custom-control-input" id="heart_disease" name="heart_disease" value="5">
+                          		<label class="custom-control-label" for="heart_disease">Heart Disease</label>
+                          		<input class="custom-control-input" id="heart_diseasehidden" type="hidden" value="0" name="heart_disease">
+                      		</div>
+                      		<div class="custom-control custom-checkbox">
+                          		<input type="checkbox" class="custom-control-input" id="bp" name="bp" value="1">
+                          		<label class="custom-control-label" for="bp">High Blood Pressure</label>
+                          		<input class="custom-control-input" id="bp" type="hidden" value="0" name="bp">
+                      		</div>
+                      		<br>
+                      		<h6>Insurance Details:</h6>
+                      		<div class="input-group mb-3">
+                          		<div class="input-group-prepend">
+                              		<span class="input-group-text">Assured Sum(In Lakhs)</span>
+                          		</div>
+                          		<input type="number" id="assu_sum" name="assu_sum" class="form-control">
+                      		</div>
+		                    <div class="input-group mb-3">
+		                        <div class="input-group-prepend">
+		                            <span class="input-group-text">Policy Beneficiaries</span>
+		                        </div>
+		                        <input type="number" id="nop_pol" name="nop_pol" class="form-control">
+		                    </div>
+		                    <div class="input-group mb-3">
+		                        <div class="input-group-prepend">
+		                            <span class="input-group-text">Premium (in K)</span>
+		                        </div>
+		                        <input type="number" id="premium" name="premium" class="form-control">
+		                    </div>
+                      		<button type="submit" class="btn btn-dark" align="center">SUBMIT</button>
+                  			</div>
+              			</div>
+          			</form>
+            	</div>
+        	</div>
+    	</div>
+
+          <div id="file_input" style="display: none;">
+            <div style="padding: 150px 0px 50px; text-align: center;">
+              <h2>Health Insurance Churn Analysis</h2>
+              <p>Upload a dataset to run the Machine learning model and to visualize the results</p>
+            </div>
+            <form action="/file_result" method="Post" enctype="multipart/form-data">
+              <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" id="file" name="file">
+                <label class="custom-file-label" for="file">Choose file</label>
+              </div>  
+              <div class="mt-3" style="padding-bottom: 250px;">
+                <button type="submit" class="btn btn-info">Upload</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+   </div>
+
+    <script>
+      $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+      function func(id) {
+        document.getElementById("data_desc").style.display = "none";
+        document.getElementById("dataset").style.display = "none";
+        document.getElementById("corr_matrix").style.display = "none";
+        document.getElementById("conf_matrix").style.display = "none";
+        document.getElementById("state_churn").style.display = "none";
+        document.getElementById("age_churn").style.display = "none";
+        document.getElementById("income_churn").style.display = "none";
+        document.getElementById("file_input").style.display = "none";
+        document.getElementById("single_input").style.display = "none";
+        document.getElementById(id).style.display = "block";
+      }
+      if (document.getElementById("working").checked) {
+            document.getElementById('workinghidden').disabled = true;
+      }
+      if (document.getElementById("smoker").checked) {
+            document.getElementById('smokerhidden').disabled = true;
+      }
+      if (document.getElementById("heat_disease").checked) {
+            document.getElementById('heat_diseasehidden').disabled = true;
+      }
+      if (document.getElementById("sugar").checked) {
+            document.getElementById('sugarhidden').disabled = true;
+      }
+      if (document.getElementById("bp").checked) {
+            document.getElementById('bphidden').disabled = true;
+      }
+      if (document.getElementById("married").checked) {
+            document.getElementById('marriedhidden').disabled = true;
+      }
+	</script>
+
+
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends "nav.html" %}
+
+{% block content %}
+	
+	{%if prediction == 0 %}
+		<div class="container" style="padding-top: 20px; padding-bottom: 10px" >
+			<h4>Result</h4><br>
+			<div class="row">
+				<div class="col">
+					<img src="{{ url_for('static', filename='stays.jpg' ) }}" alt="stays">
+				</div>
+				<div class="col">
+					<h2>Customer probably stays :)</h2>
+					<p>The details of customer are:</p>
+					<div class="table-bordered table-sm">
+						<table>
+							<tbody>
+								<tr>
+									<td>State:</td>
+									<td>{%if values[0] == 0%}California{%elif values[0] == 1%}Colorado{%else%} Texas {%endif%} </td>
+								</tr>
+								<tr>
+									<td>Age:</td>
+									<td>{{values[1]}}</td>
+								</tr>
+								<tr>
+									<td>Gender:</td>
+									<td>{%if values[2] == 1%} Male {%else%} Female{%endif%}</td>
+								</tr><tr>
+									<td>Education Level:</td>
+									<td>{{values[3]}}</td>
+								</tr><tr>
+									<td>Marital Status:</td>
+									<td>{%if values[4] == 0%} Unmarried {%else%} Married {%endif%}</td>
+								</tr><tr>
+									<td>Employement Status:</td>
+									<td>{%if values[5] == 0%} Unemployed {%else%} Employed {%endif%}</td>
+								</tr><tr>
+									<td>Income:</td>
+									<td> {{values[6]}} LPA</td>
+								</tr><tr>
+									<td>Feedback:</td>
+									<td>{%if values[7] == -1%} Negative {%elif values[7] == 0%} Neutral{%else%}Postive{%endif%}</td>
+								</tr><tr>
+									<td>Personal Health History:</td>
+									<td>{%if values[8] == 1%} Smoker {%endif%} {%if values[9] == 1%} <br>Has Sugar {%endif%} {%if values[10] == 1%} <br>Has Heart Disease {%endif%} {%if values[11] == 1%} <br>Has High Blood Pressure {%endif%} {%if values[8] == 0 and values[11] == 0 and values[9] == 0 and values[10] == 0%} None {%endif%}</td>
+								</tr><tr>
+									<td>Assured Sum:</td>
+									<td> {{values[12]}} L</td>
+								</tr><tr>
+									<td>Policy Benificiaries:</td>
+									<td>{{values[13]}}</td>
+								</tr><tr>
+									<td>Premium:</td>
+									<td>{{values[14]}} K</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% elif prediction == 1 %}
+		<div class="container" style="padding-top: 25px; padding-bottom: 10px" >
+			<h4>Result</h4><br>
+			<div class="row">
+				<div class="col">
+					<img src="{{ url_for('static', filename='quits.png' ) }}" alt="quits">
+				</div>
+				<div class="col">
+					<h2>Customer probably leaves :(</h2>
+					<p>The details of customer are:</p>
+					<div class="table-bordered table-sm">
+						<table>
+							<tbody>
+								<tr>
+									<td>State:</td>
+									<td>{%if values[0] == 0%}California{%elif values[0] == 1%}Colorado{%else%} Texas {%endif%} </td>
+								</tr>
+								<tr>
+									<td>Age:</td>
+									<td>{{values[1]}}</td>
+								</tr>
+								<tr>
+									<td>Gender:</td>
+									<td>{%if values[2] == 1%} Male {%else%} Female{%endif%}</td>
+								</tr><tr>
+									<td>Education Level:</td>
+									<td>{{values[3]}}</td>
+								</tr><tr>
+									<td>Marital Status:</td>
+									<td>{%if values[4] == 0%} Unmarried {%else%} Married {%endif%}</td>
+								</tr><tr>
+									<td>Employement Status:</td>
+									<td>{%if values[5] == 0%} Unemployed {%else%} Employed {%endif%}</td>
+								</tr><tr>
+									<td>Income:</td>
+									<td> {{values[6]}} LPA</td>
+								</tr><tr>
+									<td>Feedback:</td>
+									<td>{%if values[7] == -1%} Negative {%elif values[7] == 0%} Neutral{%else%}Postive{%endif%}</td>
+								</tr><tr>
+									<td>Personal Health History:</td>
+									<td>{%if values[8] == 1%} Smoker {%endif%} {%if values[9] == 1%} <br>Has Sugar {%endif%} {%if values[10] == 1%} <br>Has Heart Disease {%endif%} {%if values[11] == 1%} <br>Has High Blood Pressure {%endif%} {%if values[8] == 0 and values[11] == 0 and values[9] == 0 and values[10] == 0%} None {%endif%}</td>
+								</tr><tr>
+									<td>Assured Sum:</td>
+									<td> {{values[12]}} L</td>
+								</tr><tr>
+									<td>Policy Benificiaries:</td>
+									<td>{{values[13]}}</td>
+								</tr><tr>
+									<td>Premium:</td>
+									<td>{{values[14]}} K</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+{% endblock %}
